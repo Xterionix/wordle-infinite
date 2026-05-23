@@ -1,0 +1,7 @@
+{
+  "name": "Wordle Infinite",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
