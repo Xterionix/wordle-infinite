@@ -1,0 +1,23 @@
+.tile {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    font-size: 3rem;
+    font-weight: bolder;
+}
+
+.unguessed {
+    border: 3px solid gray;
+    border-radius: 2px;
+}
+
+.correct {
+    background-color: rgb(83, 141, 78);
+}
+
+.incorrect {
+    background-color: rgb(58, 58, 60);
+}
+
+.semi-correct {
+    background-color: rgb(181, 159, 59);
+}

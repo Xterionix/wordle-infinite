@@ -1,5 +1,5 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import Tile, { TileState } from '../components/Tile'
 import './Tab1.css';
 
 const Tab1: React.FC = () => {
@@ -7,16 +7,59 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle className='ion-text-center title'>WORDLE INFINITE</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen className='ion-padding'>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
+            <IonTitle className='ion-text-center title'>WORDLE INFINITE</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
+        <IonGrid>
+          <IonRow>
+            <IonCol><Tile char='A' selected={false} state={TileState.Incorrect}/></IonCol>
+            <IonCol><Tile char='B' selected={false} state={TileState.Incorrect}/></IonCol>
+            <IonCol><Tile char='C' selected={false} state={TileState.Correct}/></IonCol>
+            <IonCol><Tile char='D' selected={false} state={TileState.SemiCorrect}/></IonCol>
+            <IonCol><Tile char='E' selected={false} state={TileState.Incorrect}/></IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
