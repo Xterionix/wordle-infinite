@@ -1,9 +1,19 @@
 import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import Tile, { TileState } from '../components/Tile'
+import { useEffect } from 'react';
+import Tile from '../components/Tile'
 import './Tab1.css';
 import Keyboard from '../components/Keyboard';
+import game, { getTileState } from '../lib/game';
 
 const Tab1: React.FC = () => {
+
+  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter } = game()
+
+  useEffect(() => {
+    chooseRandomWord()
+  }, [])
+
+
   return (
     <IonPage>
       <IonHeader>
@@ -18,50 +28,17 @@ const Tab1: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonGrid>
-          <IonRow>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
-          </IonRow>
+          {
+            gameState.guesses.map((guess, i) => {
+              return <IonRow key={i}>
+                {Array.from({ length: 5 }, (_, j) => guess[j] ?? '').map((letter, j) => (
+                  <IonCol key={j}><Tile char={letter.toUpperCase()} selected={false} state={getTileState(gameState, guess, letter, j)} /></IonCol>
+                ))}
+              </IonRow>
+            })
+          }
         </IonGrid>
-        <Keyboard></Keyboard>
+        <Keyboard onClick={handleLetterInput} onDelete={handleDelete} onEnter={handleEnter}></Keyboard>
       </IonContent>
     </IonPage>
   );
