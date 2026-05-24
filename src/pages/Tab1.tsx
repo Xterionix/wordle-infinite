@@ -38,7 +38,7 @@ const Tab1: React.FC = () => {
             })
           }
         </IonGrid>
-        <Keyboard onClick={handleLetterInput} onDelete={handleDelete} onEnter={handleEnter}></Keyboard>
+        <Keyboard onClick={handleLetterInput} onDelete={handleDelete} onEnter={handleEnter} gameState={gameState}></Keyboard>
       </IonContent>
     </IonPage>
   );

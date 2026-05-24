@@ -3,16 +3,24 @@ import { allowedGuesses } from '../../public/lists/all'
 import { answers } from '../../public/lists/answers'
 import { TileState } from "../components/Tile";
 
-interface GameData {
+export interface GameData {
     answer: string;
     guesses: string[];
-    current: number
+    current: number;
+    unguessedLetters: string[];
+    correctLetters: string[];
+    semiCorrectLetters: string[];
+    incorrectLetters: string[];
 }
 
 const emptyGameData: GameData = {
     answer: '',
     guesses: ['', '', '', '', '', ''],
-    current: 0
+    current: 0,
+    unguessedLetters: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''),
+    correctLetters: [],
+    semiCorrectLetters: [],
+    incorrectLetters: []
 }
 
 export default function game() {
@@ -31,6 +39,8 @@ export default function game() {
 
     function handleLetterInput(letter: string) {
         setGameState(prev => {
+
+            if (prev.current > 5) return prev;
             if (prev.guesses[prev.current].length >= 5) return prev;
 
             const nextGuesses = [...prev.guesses]
@@ -38,7 +48,7 @@ export default function game() {
 
             return {
                 ...prev,
-                guesses: nextGuesses,
+                guesses: nextGuesses
             }
         })
     }
@@ -48,7 +58,24 @@ export default function game() {
 
             if (prev.guesses[prev.current].length < 5) return prev;
 
-            if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) {console.log('invalid guess'); return prev};
+            if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) { console.log('invalid guess'); return prev };
+
+            let nextUnguessedLetters = [...prev.unguessedLetters]
+            const currentGuess = prev.guesses[prev.current]
+            currentGuess.split('').forEach((letter, i) => {
+                switch (getKeyState(prev, letter, i)) {
+                    case TileState.Correct:
+                        if (!prev.correctLetters.includes(letter)) prev.correctLetters.push(letter);
+                        break;
+                    case TileState.Incorrect:
+                        if (!prev.incorrectLetters.includes(letter)) prev.incorrectLetters.push(letter);
+                        break;
+                    case TileState.SemiCorrect:
+                        if (!prev.semiCorrectLetters.includes(letter)) prev.semiCorrectLetters.push(letter);
+                        break;
+                }
+                nextUnguessedLetters = nextUnguessedLetters.filter(x => x !== letter)
+            });
 
             const nextIndex = prev.current + 1
 
@@ -80,8 +107,19 @@ export default function game() {
 export function getTileState(state: GameData, guess: string, letter: string, letterIndex: number) {
 
     if (letter == '' || state.guesses.lastIndexOf(guess) == state.current) return TileState.Unguessed;
+    return getKeyState(state, letter, letterIndex);
+
+}
+
+export function getKeyState(state: GameData, letter: string, letterIndex: number) {
     if (!state.answer.toUpperCase().includes(letter)) return TileState.Incorrect;
     if (state.answer.toUpperCase()[letterIndex] == letter) return TileState.Correct;
     return TileState.SemiCorrect
+}
 
+export function findLetterState(state: GameData, letter: string) {
+    if (state.correctLetters.includes(letter)) return TileState.Correct
+    if (state.semiCorrectLetters.includes(letter)) return TileState.SemiCorrect
+    if (state.incorrectLetters.includes(letter)) return TileState.Incorrect
+    return TileState.Unguessed
 }
