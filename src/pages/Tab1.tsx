@@ -1,6 +1,7 @@
 import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import Tile, { TileState } from '../components/Tile'
 import './Tab1.css';
+import Keyboard from '../components/Keyboard';
 
 const Tab1: React.FC = () => {
   return (
@@ -60,6 +61,7 @@ const Tab1: React.FC = () => {
             <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
           </IonRow>
         </IonGrid>
+        <Keyboard></Keyboard>
       </IonContent>
     </IonPage>
   );

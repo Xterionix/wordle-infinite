@@ -1,0 +1,8 @@
+.keyboard-row {
+    gap: 0.3rem
+}
+
+.keyboard {
+    row-gap: 0.3rem;
+    margin-top: 0.25rem;
+}
