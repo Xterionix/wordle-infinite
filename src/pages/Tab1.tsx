@@ -19,46 +19,46 @@ const Tab1: React.FC = () => {
         </IonHeader>
         <IonGrid>
           <IonRow>
-            <IonCol><Tile char='A' selected={false} state={TileState.Incorrect}/></IonCol>
-            <IonCol><Tile char='B' selected={false} state={TileState.Incorrect}/></IonCol>
-            <IonCol><Tile char='C' selected={false} state={TileState.Correct}/></IonCol>
-            <IonCol><Tile char='D' selected={false} state={TileState.SemiCorrect}/></IonCol>
-            <IonCol><Tile char='E' selected={false} state={TileState.Incorrect}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
           </IonRow>
           <IonRow>
-            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
           </IonRow>
           <IonRow>
-            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
           </IonRow>
           <IonRow>
-            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
           </IonRow>
           <IonRow>
-            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
           </IonRow>
           <IonRow>
-            <IonCol><Tile char='A' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='B' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='C' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='D' selected={false} state={TileState.Unguessed}/></IonCol>
-            <IonCol><Tile char='E' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
+            <IonCol><Tile char='' selected={false} state={TileState.Unguessed}/></IonCol>
           </IonRow>
         </IonGrid>
         <Keyboard></Keyboard>
