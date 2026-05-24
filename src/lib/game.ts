@@ -11,6 +11,7 @@ export interface GameData {
     correctLetters: string[];
     semiCorrectLetters: string[];
     incorrectLetters: string[];
+    hasWon: boolean
 }
 
 const emptyGameData: GameData = {
@@ -20,7 +21,8 @@ const emptyGameData: GameData = {
     unguessedLetters: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''),
     correctLetters: [],
     semiCorrectLetters: [],
-    incorrectLetters: []
+    incorrectLetters: [],
+    hasWon: false
 }
 
 export default function game() {
@@ -41,6 +43,7 @@ export default function game() {
         setGameState(prev => {
 
             if (prev.current > 5) return prev;
+            if (prev.hasWon) return prev;
             if (prev.guesses[prev.current].length >= 5) return prev;
 
             const nextGuesses = [...prev.guesses]
@@ -56,7 +59,18 @@ export default function game() {
     function handleEnter() {
         setGameState(prev => {
 
-            if (prev.guesses[prev.current].length < 5) return prev;
+            if (prev.guesses[prev.current].length < 5) {
+                return {
+                    answer: '',
+                    guesses: ['', '', '', '', '', ''],
+                    current: 0,
+                    unguessedLetters: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''),
+                    correctLetters: [],
+                    semiCorrectLetters: [],
+                    incorrectLetters: [],
+                    hasWon: false
+                }
+            }
 
             if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) { console.log('invalid guess'); return prev };
 
@@ -78,6 +92,7 @@ export default function game() {
             });
 
             const nextIndex = prev.current + 1
+            if (prev.correctLetters.length == 5) prev.hasWon = true;
 
             return {
                 ...prev,
@@ -89,6 +104,7 @@ export default function game() {
     function handleDelete() {
         setGameState(prev => {
             if (prev.guesses[prev.current].length <= 0) return prev;
+            if (prev.hasWon) return prev;
 
             const nextGuesses = [...prev.guesses]
             nextGuesses[prev.current] = nextGuesses[prev.current].slice(0, nextGuesses[prev.current].length - 1)

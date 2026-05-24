@@ -10,9 +10,10 @@ const Tab1: React.FC = () => {
   const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter } = game()
 
   useEffect(() => {
-    chooseRandomWord()
-  }, [])
+    if (gameState.answer == '') chooseRandomWord()
+  }, [gameState.answer])
 
+  console.log(gameState)
 
   return (
     <IonPage>
