@@ -85,7 +85,7 @@ export default function game() {
             let nextUnguessedLetters = [...prev.unguessedLetters]
             const currentGuess = prev.guesses[prev.current]
             currentGuess.split('').forEach((letter, i) => {
-                switch (getKeyState(prev, letter, i)) {
+                switch (getKeyState(prev, currentGuess, letter, i)) {
                     case TileState.Correct:
                         if (!prev.correctLetters.includes(letter)) prev.correctLetters.push(letter);
                         break;
@@ -152,14 +152,26 @@ export default function game() {
 export function getTileState(state: GameData, guess: string, letter: string, letterIndex: number, guessIndex: number) {
 
     if (letter == '' || guessIndex == state.current) return TileState.Unguessed;
-    return getKeyState(state, letter, letterIndex);
+    return getKeyState(state, guess, letter, letterIndex);
 
 }
 
-export function getKeyState(state: GameData, letter: string, letterIndex: number) {
+export function getKeyState(state: GameData, guess: string, letter: string, letterIndex: number) {
     if (!state.answer.toUpperCase().includes(letter)) return TileState.Incorrect;
     if (state.answer.toUpperCase()[letterIndex] == letter) return TileState.Correct;
-    return TileState.SemiCorrect
+    
+    const answerLetterCount = state.answer.toUpperCase().split('').filter(x => x == letter).length
+    const guessLetterCount = guess.split('').filter(x => x == letter).length
+
+    if (answerLetterCount == guessLetterCount) return TileState.SemiCorrect
+
+    const matchingLetterLocations = guess.split('').map((x, i) => x == letter ? i : -1).filter(x => x != -1)
+    for (let i = 0; i < answerLetterCount; i++) {
+       if (matchingLetterLocations[i] == letterIndex) return TileState.SemiCorrect 
+    }
+
+    return TileState.Incorrect
+
 }
 
 export function findLetterState(state: GameData, letter: string) {
