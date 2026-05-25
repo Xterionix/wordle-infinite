@@ -59,7 +59,7 @@ export default function game() {
     function handleEnter() {
         setGameState(prev => {
 
-            if (prev.guesses[prev.current].length < 5) {
+            if (prev.hasWon || prev.current > 5) {
                 return {
                     answer: '',
                     guesses: ['', '', '', '', '', ''],
