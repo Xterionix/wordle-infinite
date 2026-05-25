@@ -34,7 +34,7 @@ const Tab1: React.FC = () => {
               return <IonRow key={i} className={i == gameState.shakeRow ? 'shake' : ''} onAnimationEnd={resetShakeRow}>
                 {Array.from({ length: 5 }, (_, j) => guess[j] ?? '').map((letter, j) => (
                   <IonCol key={j}>
-                    <Tile char={letter.toUpperCase()} selected={false} state={getTileState(gameState, guess, letter, j)} />
+                    <Tile char={letter.toUpperCase()} selected={false} state={getTileState(gameState, guess, letter, j, i)} />
                   </IonCol>
                 ))}
               </IonRow>

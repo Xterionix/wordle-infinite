@@ -149,9 +149,9 @@ export default function game() {
 
 }
 
-export function getTileState(state: GameData, guess: string, letter: string, letterIndex: number) {
+export function getTileState(state: GameData, guess: string, letter: string, letterIndex: number, guessIndex: number) {
 
-    if (letter == '' || state.guesses.lastIndexOf(guess) == state.current) return TileState.Unguessed;
+    if (letter == '' || guessIndex == state.current) return TileState.Unguessed;
     return getKeyState(state, letter, letterIndex);
 
 }
