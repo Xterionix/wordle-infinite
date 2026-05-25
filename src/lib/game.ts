@@ -163,7 +163,7 @@ export function getKeyState(state: GameData, guess: string, letter: string, lett
     const answerLetterCount = state.answer.toUpperCase().split('').filter(x => x == letter).length
     const guessLetterCount = guess.split('').filter(x => x == letter).length
 
-    if (answerLetterCount == guessLetterCount) return TileState.SemiCorrect
+    if (answerLetterCount == guessLetterCount && answerLetterCount == 1) return TileState.SemiCorrect
 
     const matchingLetterLocations = guess.split('').map((x, i) => x == letter ? i : -1).filter(x => x != -1)
     for (let i = 0; i < answerLetterCount; i++) {
