@@ -100,11 +100,11 @@ export default function game() {
             });
 
             const nextIndex = prev.current + 1
-            if (prev.correctLetters.length == 5) prev.hasWon = true;
-
+            
             return {
                 ...prev,
-                current: nextIndex
+                current: nextIndex,
+                hasWon: lastGuess()?.toLowerCase() == gameState.answer
             }
         })
     }
@@ -134,6 +134,15 @@ export default function game() {
             ...prev,
             shakeRow: -1
         }))
+    }
+
+    function lastGuess() {
+        for (let i = 5; i >= 0; i--) {
+            const guess = gameState.guesses[i]
+            console.log('guess ', i, guess)
+            if (guess === '') continue;
+            return guess
+        }
     }
 
     return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow }
