@@ -9,5 +9,3 @@
 
 - Output correct answer when failing
 - Flip to reveal animation when making guesses
-- Shake animation when adding a letter when you can't // Similar for delete & enter
-- Shake animation when a guess isn't a valid letter

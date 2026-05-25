@@ -7,7 +7,7 @@ import game, { getTileState } from '../lib/game';
 
 const Tab1: React.FC = () => {
 
-  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter } = game()
+  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow } = game()
 
   useEffect(() => {
     if (gameState.answer == '') chooseRandomWord()
@@ -31,9 +31,11 @@ const Tab1: React.FC = () => {
         <IonGrid>
           {
             gameState.guesses.map((guess, i) => {
-              return <IonRow key={i}>
+              return <IonRow key={i} className={i == gameState.shakeRow ? 'shake' : ''} onAnimationEnd={resetShakeRow}>
                 {Array.from({ length: 5 }, (_, j) => guess[j] ?? '').map((letter, j) => (
-                  <IonCol key={j}><Tile char={letter.toUpperCase()} selected={false} state={getTileState(gameState, guess, letter, j)} /></IonCol>
+                  <IonCol key={j}>
+                    <Tile char={letter.toUpperCase()} selected={false} state={getTileState(gameState, guess, letter, j)} />
+                  </IonCol>
                 ))}
               </IonRow>
             })

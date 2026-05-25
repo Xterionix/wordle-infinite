@@ -11,7 +11,8 @@ export interface GameData {
     correctLetters: string[];
     semiCorrectLetters: string[];
     incorrectLetters: string[];
-    hasWon: boolean
+    hasWon: boolean;
+    shakeRow: number;
 }
 
 const emptyGameData: GameData = {
@@ -22,13 +23,13 @@ const emptyGameData: GameData = {
     correctLetters: [],
     semiCorrectLetters: [],
     incorrectLetters: [],
-    hasWon: false
+    hasWon: false,
+    shakeRow: -1
 }
 
 export default function game() {
 
     const [gameState, setGameState] = useState(emptyGameData)
-
 
     function chooseRandomWord() {
         setGameState(prev => ({
@@ -42,9 +43,12 @@ export default function game() {
     function handleLetterInput(letter: string) {
         setGameState(prev => {
 
-            if (prev.current > 5) return prev;
             if (prev.hasWon) return prev;
-            if (prev.guesses[prev.current].length >= 5) return prev;
+            if (prev.current > 5) return prev;
+            if (prev.guesses[prev.current].length >= 5) return {
+                ...prev,
+                shakeRow: prev.current
+            }
 
             const nextGuesses = [...prev.guesses]
             nextGuesses[prev.current] = `${nextGuesses[prev.current]}${letter}`
@@ -68,11 +72,15 @@ export default function game() {
                     correctLetters: [],
                     semiCorrectLetters: [],
                     incorrectLetters: [],
-                    hasWon: false
+                    hasWon: false,
+                    shakeRow: -1
                 }
             }
 
-            if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) { console.log('invalid guess'); return prev };
+            if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) return {
+                ...prev,
+                shakeRow: prev.current
+            }
 
             let nextUnguessedLetters = [...prev.unguessedLetters]
             const currentGuess = prev.guesses[prev.current]
@@ -103,7 +111,12 @@ export default function game() {
 
     function handleDelete() {
         setGameState(prev => {
-            if (prev.guesses[prev.current].length <= 0) return prev;
+            
+            if (prev.guesses[prev.current].length <= 0) return {
+                ...prev,
+                shakeRow: prev.current
+            }
+
             if (prev.hasWon) return prev;
 
             const nextGuesses = [...prev.guesses]
@@ -116,7 +129,14 @@ export default function game() {
         })
     }
 
-    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter }
+    function resetShakeRow() {
+        setGameState(prev => ({
+            ...prev,
+            shakeRow: -1
+        }))
+    }
+
+    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow }
 
 }
 
