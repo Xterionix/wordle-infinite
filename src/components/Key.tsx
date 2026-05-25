@@ -13,7 +13,7 @@ interface Props {
 export function Key({ char, children, style, gameState, onClick }: Props) {
 
     return (
-        <div className={`key ion-display-flex ion-align-items-center ion-justify-content-center ${char.length == 1 ? findLetterState(gameState, char) : 'unguessed'}-key`} style={style} onClick={() => onClick(char)}>
+        <div className={`key ion-display-flex ion-align-items-center ion-justify-content-center ${char.length == 1 ? findLetterState(gameState, char) : 'unguessed'}`} style={style} onClick={() => onClick(char)}>
             {children ?? char}
         </div>
     );

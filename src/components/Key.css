@@ -1,21 +1,22 @@
 .key {
     border-radius: 0.25rem;
-    width: 1.75rem;
-    height: 2.75rem;
+    width: 8dvw;
+    height: 8dvh;
+    font-weight: bolder;
 }
 
-.unguessed-key {
+.key.unguessed {
     background-color: rgb(129, 131, 132);
 }
 
-.correct-key {
+.key.correct {
     background-color: rgb(83, 141, 78);
 }
 
-.incorrect-key {
+.key.incorrect {
     background-color: rgb(58, 58, 60);
 }
 
-.semi-correct-key {
+.key.semi-correct {
     background-color: rgb(181, 159, 59);
 }

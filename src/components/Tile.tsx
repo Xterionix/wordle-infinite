@@ -16,7 +16,7 @@ interface Props {
 
 const Tile: React.FC<Props> = ({ char, selected, state }) => {
     return (
-        <div className={`tile ion-text-center ${state} ${selected && state == TileState.Unguessed ? 'selected' : ''}`}>
+        <div className={`tile ion-display-flex ion-justify-content-center ion-align-items-center ${state} ${selected && state == TileState.Unguessed ? 'selected' : ''}`}>
             {char}
         </div>
     );
