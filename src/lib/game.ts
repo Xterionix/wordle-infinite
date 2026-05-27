@@ -77,13 +77,13 @@ export default function game() {
             currentGuess.split('').forEach((letter, i) => {
                 switch (getKeyState(prev, currentGuess, letter, i)) {
                     case TileState.Correct:
-                        if (!prev.correctLetters.includes(letter)) prev.correctLetters.push(letter);
+                        if (!prev.correctLetters.includes(letter)) prev.correctLetters = [...prev.correctLetters, letter];
                         break;
                     case TileState.Incorrect:
-                        if (!prev.incorrectLetters.includes(letter)) prev.incorrectLetters.push(letter);
+                        if (!prev.incorrectLetters.includes(letter)) prev.incorrectLetters = [...prev.incorrectLetters, letter];
                         break;
                     case TileState.SemiCorrect:
-                        if (!prev.semiCorrectLetters.includes(letter)) prev.semiCorrectLetters.push(letter);
+                        if (!prev.semiCorrectLetters.includes(letter)) prev.semiCorrectLetters = [...prev.semiCorrectLetters, letter];
                         break;
                 }
                 nextUnguessedLetters = nextUnguessedLetters.filter(x => x !== letter)
