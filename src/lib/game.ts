@@ -63,19 +63,7 @@ export default function game() {
     function handleEnter() {
         setGameState(prev => {
 
-            if (prev.hasWon || prev.current > 5) {
-                return {
-                    answer: '',
-                    guesses: ['', '', '', '', '', ''],
-                    current: 0,
-                    unguessedLetters: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split(''),
-                    correctLetters: [],
-                    semiCorrectLetters: [],
-                    incorrectLetters: [],
-                    hasWon: false,
-                    shakeRow: -1
-                }
-            }
+            if (prev.hasWon || prev.current > 5) return structuredClone(emptyGameData)
 
             if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) return {
                 ...prev,
