@@ -13,7 +13,8 @@ export interface GameData {
     incorrectLetters: string[];
     hasWon: boolean;
     shakeRow: number;
-    flipTile: number
+    flipTile: number;
+    isFlipping: boolean
 }
 
 const emptyGameData: GameData = {
@@ -26,7 +27,8 @@ const emptyGameData: GameData = {
     incorrectLetters: [],
     hasWon: false,
     shakeRow: -1,
-    flipTile: 0
+    flipTile: 0,
+    isFlipping: false
 }
 
 export default function game() {
@@ -94,7 +96,8 @@ export default function game() {
             return {
                 ...prev,
                 current: nextIndex,
-                hasWon: lastGuess()?.toLowerCase() == gameState.answer
+                hasWon: lastGuess()?.toLowerCase() == gameState.answer,
+                isFlipping: true
             }
         })
     }
@@ -129,7 +132,8 @@ export default function game() {
     function incrementFlipTile() {
         setGameState(prev => ({
             ...prev,
-            flipTile: prev.flipTile + 1 > 4 ? 0 : prev.flipTile + 1
+            flipTile: prev.flipTile + 1 > 4 ? 0 : prev.flipTile + 1,
+            isFlipping: prev.flipTile + 1 > 4 ? false : true
         }))
     }
 
