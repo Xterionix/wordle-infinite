@@ -13,6 +13,7 @@ export interface GameData {
     incorrectLetters: string[];
     hasWon: boolean;
     shakeRow: number;
+    flipTile: number
 }
 
 const emptyGameData: GameData = {
@@ -24,7 +25,8 @@ const emptyGameData: GameData = {
     semiCorrectLetters: [],
     incorrectLetters: [],
     hasWon: false,
-    shakeRow: -1
+    shakeRow: -1,
+    flipTile: 0
 }
 
 export default function game() {
@@ -124,6 +126,13 @@ export default function game() {
         }))
     }
 
+    function incrementFlipTile() {
+        setGameState(prev => ({
+            ...prev,
+            flipTile: prev.flipTile + 1 > 4 ? 0 : prev.flipTile + 1
+        }))
+    }
+
     function lastGuess() {
         for (let i = 5; i >= 0; i--) {
             const guess = gameState.guesses[i]
@@ -133,7 +142,7 @@ export default function game() {
         }
     }
 
-    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow }
+    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile }
 
 }
 

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './Tile.css';
 
 export const enum TileState {
@@ -11,13 +12,25 @@ interface Props {
     char: string;
     selected: boolean
     state: TileState
+    flip: boolean,
+    onAnimationEnd: () => void
 }
 
 
-const Tile: React.FC<Props> = ({ char, selected, state }) => {
+const Tile: React.FC<Props> = ({ char, selected, state, flip, onAnimationEnd }) => {
+
+    const [hasAnimated, setAnimated] = useState(false)
+
     return (
-        <div className={`tile ion-display-flex ion-justify-content-center ion-align-items-center ${state} ${selected && state == TileState.Unguessed ? 'selected' : ''}`}>
-            {char}
+        <div className='tile'>
+            <div className={`tile-inner ${(flip && !hasAnimated) || hasAnimated ? 'flip' : ''}`} onAnimationEnd={() => { onAnimationEnd(); setAnimated(true) }}>
+                <div className={`tile-front ion-display-flex ion-justify-content-center ion-align-items-center ${selected ? 'selected' : TileState.Unguessed}`}>
+                    {char}
+                </div>
+                <div className={`tile-back ion-display-flex ion-justify-content-center ion-align-items-center ${state}`}>
+                    {char}
+                </div>
+            </div>
         </div>
     );
 };

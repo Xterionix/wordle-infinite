@@ -5,6 +5,42 @@
     font-weight: bolder;
     height: 3.5rem;
     width: 3.5rem;
+    background-color: transparent;
+    perspective: 1000px;
+}
+
+.tile-inner {
+    position: relative;
+    height: 3.5rem;
+    width: 3.5rem;
+    transform-style: preserve-3d;
+}
+
+.flip {
+    animation-name: flip;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes flip {
+    from {
+        transform: rotateX(0deg);
+    }
+    to {
+        transform: rotateX(180deg);
+    }
+}
+
+.tile-front, .tile-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.tile-back {
+    transform: rotateX(180deg);
 }
 
 .unguessed {
