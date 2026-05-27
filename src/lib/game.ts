@@ -136,7 +136,6 @@ export default function game() {
     function lastGuess() {
         for (let i = 5; i >= 0; i--) {
             const guess = gameState.guesses[i]
-            console.log('guess ', i, guess)
             if (guess === '') continue;
             return guess
         }
