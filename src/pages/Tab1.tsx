@@ -28,7 +28,7 @@ const Tab1: React.FC = () => {
             <IonTitle className='ion-text-center title'>WORDLE INFINITE</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div className='correct-answer' style={{display: gameState.current > 5 ? '' : 'none'}}>
+        <div className='correct-answer' style={{display: !gameState.hasWon && gameState.current > 5 ? '' : 'none'}}>
           <div id='answer'>{gameState.answer}</div>
         </div>
         <IonGrid>
