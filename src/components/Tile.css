@@ -43,8 +43,13 @@
     transform: rotateX(180deg);
 }
 
-.unguessed {
-    border: 3px solid rgb(129, 131, 132);
+.unguessed-full {
+    border: 3px solid rgb(86, 87, 88);
+    border-radius: 2px;
+}
+
+.unguessed-empty {
+    border: 3px solid rgb(58, 58, 60);
     border-radius: 2px;
 }
 

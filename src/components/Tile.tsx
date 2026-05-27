@@ -24,7 +24,7 @@ const Tile: React.FC<Props> = ({ char, selected, state, flip, onAnimationEnd }) 
     return (
         <div className='tile'>
             <div className={`tile-inner ${(flip && !hasAnimated) || hasAnimated ? 'flip' : ''}`} onAnimationEnd={() => { onAnimationEnd(); setAnimated(true) }}>
-                <div className={`tile-front ion-display-flex ion-justify-content-center ion-align-items-center ${selected ? 'selected' : TileState.Unguessed}`}>
+                <div className={`tile-front ion-display-flex ion-justify-content-center ion-align-items-center ${TileState.Unguessed}${char.length == 1 ? '-full' : '-empty'}`}>
                     {char}
                 </div>
                 <div className={`tile-back ion-display-flex ion-justify-content-center ion-align-items-center ${state}`}>
