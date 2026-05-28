@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Tile.css';
+import { GameData } from '../lib/game';
 
 export const enum TileState {
     Unguessed = 'unguessed', // Transparent
@@ -13,13 +14,18 @@ interface Props {
     selected: boolean
     state: TileState
     flip: boolean,
+    gameState: GameData
     onAnimationEnd: () => void
 }
 
 
-const Tile: React.FC<Props> = ({ char, selected, state, flip, onAnimationEnd }) => {
+const Tile: React.FC<Props> = ({ char, selected, state, flip, gameState, onAnimationEnd }) => {
 
     const [hasAnimated, setAnimated] = useState(false)
+
+    useEffect(() => {
+        setAnimated(false)
+    }, [gameState.answer])
 
     return (
         <div className='tile'>
