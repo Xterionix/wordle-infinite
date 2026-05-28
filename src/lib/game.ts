@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { allowedGuesses } from '../../public/lists/all'
 import { answers } from '../../public/lists/answers'
 import { TileState } from "../components/Tile";
+import { loadPreferences } from "./preferences";
 
 export interface GameData {
     answer: string;
@@ -31,9 +32,11 @@ const emptyGameData: GameData = {
     isFlipping: false
 }
 
-export default function game() {
+export default async function game() {
 
     const [gameState, setGameState] = useState(emptyGameData)
+
+    const { stats, themeValue: theme } = await loadPreferences()
 
     function chooseRandomWord() {
         setGameState(prev => ({
@@ -92,7 +95,7 @@ export default function game() {
             });
 
             const nextIndex = prev.current + 1
-            
+
             return {
                 ...prev,
                 current: nextIndex,
@@ -104,7 +107,7 @@ export default function game() {
 
     function handleDelete() {
         setGameState(prev => {
-            
+
             if (prev.guesses[prev.current].length <= 0) return {
                 ...prev,
                 shakeRow: prev.current
@@ -159,7 +162,7 @@ export function getTileState(state: GameData, guess: string, letter: string, let
 export function getKeyState(state: GameData, guess: string, letter: string, letterIndex: number) {
     if (!state.answer.toUpperCase().includes(letter)) return TileState.Incorrect;
     if (state.answer.toUpperCase()[letterIndex] == letter) return TileState.Correct;
-    
+
     const answerLetterCount = state.answer.toUpperCase().split('').filter(x => x == letter).length
     const guessLetterCount = guess.split('').filter(x => x == letter).length
 
@@ -167,7 +170,7 @@ export function getKeyState(state: GameData, guess: string, letter: string, lett
 
     const matchingLetterLocations = guess.split('').map((x, i) => x == letter ? i : -1).filter(x => x != -1)
     for (let i = 0; i < answerLetterCount; i++) {
-       if (matchingLetterLocations[i] == letterIndex) return TileState.SemiCorrect 
+        if (matchingLetterLocations[i] == letterIndex) return TileState.SemiCorrect
     }
 
     return TileState.Incorrect
