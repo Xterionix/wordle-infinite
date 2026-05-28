@@ -22,13 +22,18 @@ interface Props {
 const Tile: React.FC<Props> = ({ char, selected, state, flip, gameState, onAnimationEnd }) => {
 
     const [hasAnimated, setAnimated] = useState(false)
+    const [pop, setPop] = useState(false)
 
     useEffect(() => {
         setAnimated(false)
     }, [gameState.answer])
 
+    useEffect(() => {
+        if (char != '') setPop(true)
+    }, [char])
+
     return (
-        <div className='tile'>
+        <div className={`tile ${pop ? 'pop' : ''}`} onAnimationEnd={() => setPop(false)}>
             <div className={`tile-inner ${(flip && !hasAnimated) || hasAnimated ? 'flip' : ''}`} onAnimationEnd={() => { onAnimationEnd(); setAnimated(true) }}>
                 <div className={`tile-front ion-display-flex ion-justify-content-center ion-align-items-center ${TileState.Unguessed}${char.length == 1 ? '-full' : '-empty'}`}>
                     {char}

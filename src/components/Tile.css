@@ -64,3 +64,19 @@
 .semi-correct {
     background-color: rgb(181, 159, 59);
 }
+
+.pop {
+    animation: pop 0.1s ease-out;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
