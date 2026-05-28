@@ -15,14 +15,16 @@ export function Key({ char, children, style, gameState, onClick }: Props) {
 
     const [hasBeenRevealed, setRevealed] = useState(false);
     const [isFlipping, setFlipping] = useState(false);
+    const [nextState, setNextState] = useState(TileState.Unguessed)
+    const [state, setState] = useState(TileState.Unguessed)
 
     useEffect(() => {
-        if (gameState.isFlipping && !isFlipping) setFlipping(true);
-        else if (isFlipping && !gameState.isFlipping && findLetterState(gameState, char) != TileState.Unguessed) setRevealed(true)
+        if (gameState.isFlipping && !isFlipping) { setFlipping(true); setNextState(findLetterState(gameState, char)) }
+        else if (isFlipping && !gameState.isFlipping) { setState(nextState); setFlipping(false) }
     }, [gameState.isFlipping])
 
     return (
-        <div title={`${hasBeenRevealed}`} className={`key ion-display-flex ion-align-items-center ion-justify-content-center ${char.length == 1 && (!gameState.isFlipping || hasBeenRevealed) ? findLetterState(gameState, char) : 'unguessed'}`} style={style} onClick={() => onClick(char)}>
+        <div title={`${hasBeenRevealed}`} className={`key ion-display-flex ion-align-items-center ion-justify-content-center ${char.length == 1 ? state : 'unguessed'}`} style={style} onClick={() => onClick(char)}>
             {children ?? char}
         </div>
     );
