@@ -27,7 +27,12 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className='ion-text-center title'>WORDLE INFINITE</IonTitle>
+          <IonTitle className='title'>WORDLE INFINITE</IonTitle>
+          <IonButtons slot="end">
+            <IonButton fill="clear">
+              <IonIcon slot='icon-only' icon={settings}></IonIcon>
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
