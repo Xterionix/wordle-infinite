@@ -3,11 +3,11 @@ import { settings } from "ionicons/icons";
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import Tile from '../components/Tile'
-import './Tab1.css';
+import './Home.css';
 import Keyboard from '../components/Keyboard';
 import game, { getTileState } from '../lib/game';
 
-const Tab1: React.FC = () => {
+const Home: React.FC = () => {
 
   const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile, fetchPreferences } = game()
   const history = useHistory()
@@ -65,4 +65,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default Home;
