@@ -16,30 +16,45 @@ let initialStats: Stats = {
     scoreDistribution: [0, 0, 0, 0, 0, 0]
 }
 
-export enum Theme {
+enum Theme {
     light = 'light',
     dark = 'dark'
 }
 
-let initialTheme = 'dark'
+enum AnimationSpeed {
+    none = 0,
+    normal = 0.8,
+    fast = 0.2
+}
+
+export interface Settings {
+    theme: Theme,
+    animationSpeed: AnimationSpeed
+}
+
+let initialSettings = {
+    theme: Theme.dark,
+    animationSpeed: AnimationSpeed.normal
+}
 
 export async function loadPreferences() {
     const { value } = await Preferences.get({ key: 'stats' })
 
-    if (value == null) { saveStats(initialStats); return loadPreferences() }
+    if (value == null) saveStats(initialStats)
 
-    const stats = JSON.parse(value)
-    const { value: themeValue } = await Preferences.get({ key: 'theme' })
+    const stats = value == null ? initialStats : JSON.parse(value)
+    const { value: value2 } = await Preferences.get({ key: 'settings' })
 
-    if (!themeValue) { saveTheme(Theme.dark); return loadPreferences() }
+    if (value2 == null) saveSettings(initialSettings);
+    const settings = value2 == null ? initialSettings : JSON.parse(value2)
 
-    return { stats, themeValue }
+    return { stats, settings }
 }
 
 export async function saveStats(stats: Stats) {
     await Preferences.set({ key: 'stats', value: JSON.stringify(stats) })
 }
 
-export async function saveTheme(theme: Theme) {
-    await Preferences.set({ key: 'stats', value: theme })
+export async function saveSettings(settings: Settings) {
+    await Preferences.set({ key: 'stats', value: JSON.stringify(settings) })
 }

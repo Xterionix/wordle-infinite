@@ -36,7 +36,7 @@ export default async function game() {
 
     const [gameState, setGameState] = useState(emptyGameData)
 
-    const { stats, themeValue: theme } = await loadPreferences()
+    const { stats, settings } = await loadPreferences()
 
     function chooseRandomWord() {
         setGameState(prev => ({
