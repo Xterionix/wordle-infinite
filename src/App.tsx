@@ -1,7 +1,10 @@
 import {
   IonApp,
+  IonRouterOutlet,
+  IonTabs,
   setupIonicReact
 } from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
 import Tab1 from './pages/Tab1';
 
 /* Core CSS required for Ionic components to work properly */
@@ -33,12 +36,25 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { Route } from 'react-router';
+import Settings from './pages/Settings';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <Tab1></Tab1>
+    <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path={"/"}>
+            <Tab1 />
+          </Route>
+          <Route exact path={"/settings"}>
+            <Settings />
+          </Route>
+        </IonRouterOutlet>
+      </IonTabs>
+    </IonReactRouter>
   </IonApp>
 );
 

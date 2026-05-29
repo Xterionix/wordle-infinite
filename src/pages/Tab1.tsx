@@ -1,6 +1,7 @@
 import { IonButtons, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import {settings} from "ionicons/icons";
+import { settings } from "ionicons/icons";
 import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Tile from '../components/Tile'
 import './Tab1.css';
 import Keyboard from '../components/Keyboard';
@@ -9,6 +10,7 @@ import game, { getTileState } from '../lib/game';
 const Tab1: React.FC = () => {
 
   const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile, fetchPreferences } = game()
+  const history = useHistory()
 
   useEffect(() => {
     async function fetchingPreferences() {
@@ -27,9 +29,9 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className='title'>WORDLE INFINITE</IonTitle>
+          <IonTitle className='title' onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>WORDLE INFINITE</IonTitle>
           <IonButtons slot="end">
-            <IonButton fill="clear">
+            <IonButton fill="clear" routerLink="/settings">
               <IonIcon slot='icon-only' icon={settings}></IonIcon>
             </IonButton>
           </IonButtons>
@@ -38,10 +40,10 @@ const Tab1: React.FC = () => {
       <IonContent fullscreen className='ion-padding'>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle className='ion-text-center title'>WORDLE INFINITE</IonTitle>
+            <IonTitle className='ion-text-center title' onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>WORDLE INFINITE</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div className='correct-answer' style={{display: !gameState.hasWon && gameState.current > 5 ? '' : 'none'}}>
+        <div className='correct-answer' style={{ display: !gameState.hasWon && gameState.current > 5 ? '' : 'none' }}>
           <div id='answer'>{gameState.answer}</div>
         </div>
         <IonGrid>
