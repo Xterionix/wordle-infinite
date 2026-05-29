@@ -56,5 +56,5 @@ export async function saveStats(stats: Stats) {
 }
 
 export async function saveSettings(settings: Settings) {
-    await Preferences.set({ key: 'stats', value: JSON.stringify(settings) })
+    await Preferences.set({ key: 'settings', value: JSON.stringify(settings) })
 }
