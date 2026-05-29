@@ -1,4 +1,5 @@
-import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import {settings} from "ionicons/icons";
 import { useEffect } from 'react';
 import Tile from '../components/Tile'
 import './Tab1.css';
@@ -7,7 +8,14 @@ import game, { getTileState } from '../lib/game';
 
 const Tab1: React.FC = () => {
 
-  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile } = game()
+  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile, fetchPreferences } = game()
+
+  useEffect(() => {
+    async function fetchingPreferences() {
+      await fetchPreferences()
+    }
+    fetchingPreferences()
+  }, [])
 
   useEffect(() => {
     if (gameState.answer == '') chooseRandomWord()

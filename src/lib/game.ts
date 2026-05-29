@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { allowedGuesses } from '../../public/lists/all'
 import { answers } from '../../public/lists/answers'
 import { TileState } from "../components/Tile";
-import { loadPreferences } from "./preferences";
+import { loadPreferences, Settings, Stats } from "./preferences";
 
 export interface GameData {
     answer: string;
@@ -32,11 +32,18 @@ const emptyGameData: GameData = {
     isFlipping: false
 }
 
-export default async function game() {
+export default function game() {
 
     const [gameState, setGameState] = useState(emptyGameData)
 
-    const { stats, settings } = await loadPreferences()
+    let stats: Stats;
+    let settings: Settings;
+
+    async function fetchPreferences() {
+        const data = await loadPreferences();
+        stats = data.stats;
+        settings = data.settings
+    }
 
     function chooseRandomWord() {
         setGameState(prev => ({
@@ -148,7 +155,7 @@ export default async function game() {
         }
     }
 
-    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile }
+    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile, fetchPreferences }
 
 }
 
