@@ -9,15 +9,8 @@ import game, { getTileState } from '../lib/game';
 
 const Home: React.FC = () => {
 
-  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile, fetchPreferences } = game()
+  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile } = game()
   const history = useHistory()
-
-  useEffect(() => {
-    async function fetchingPreferences() {
-      await fetchPreferences()
-    }
-    fetchingPreferences()
-  }, [])
 
   useEffect(() => {
     if (gameState.answer == '') chooseRandomWord()

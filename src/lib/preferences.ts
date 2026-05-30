@@ -1,4 +1,5 @@
 import { Preferences } from '@capacitor/preferences';
+import { useEffect, useState } from 'react';
 
 export interface Stats {
     gamesPlayed: number;
@@ -16,25 +17,55 @@ let initialStats: Stats = {
     scoreDistribution: [0, 0, 0, 0, 0, 0]
 }
 
-enum Theme {
+export enum Theme {
     light = 'light',
     dark = 'dark'
 }
 
-enum AnimationSpeed {
-    none = 0,
-    normal = 0.8,
-    fast = 0.2
-}
+export const AnimationSpeed = {
+    none: 0,
+    normal: 0.8,
+    fast: 0.2
+} as const;
+
+export const AnimationSpeeds = {
+    0: 'none',
+    0.8: 'normal',
+    0.2: 'fast'
+} as const
+
+export type AnimationSpeed = typeof AnimationSpeed[keyof typeof AnimationSpeed]
+export type AnimationSpeeds = typeof AnimationSpeeds[keyof typeof AnimationSpeeds]
 
 export interface Settings {
     theme: Theme,
     animationSpeed: AnimationSpeed
 }
 
-let initialSettings = {
+let initialSettings: Settings = {
     theme: Theme.dark,
     animationSpeed: AnimationSpeed.normal
+}
+
+export default function usePreferences() {
+
+    const [stats, setStats] = useState(initialStats);
+    const [settings, setSettings] = useState(initialSettings);
+
+    useEffect(() => {
+        async function callFetch() {
+            await fetchPreferences()
+        }
+        callFetch()
+    }, [])
+
+    async function fetchPreferences() {
+        const data = await loadPreferences();
+        setStats(data.stats);
+        setSettings(data.settings)
+    }
+
+    return { stats, settings, fetchPreferences }
 }
 
 export async function loadPreferences() {

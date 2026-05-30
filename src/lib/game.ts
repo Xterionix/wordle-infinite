@@ -36,15 +36,6 @@ export default function game() {
 
     const [gameState, setGameState] = useState(emptyGameData)
 
-    let stats: Stats;
-    let settings: Settings;
-
-    async function fetchPreferences() {
-        const data = await loadPreferences();
-        stats = data.stats;
-        settings = data.settings
-    }
-
     function chooseRandomWord() {
         setGameState(prev => ({
             ...prev,
@@ -155,7 +146,7 @@ export default function game() {
         }
     }
 
-    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile, fetchPreferences }
+    return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile }
 
 }
 
