@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { allowedGuesses } from '../../public/lists/all'
 import { answers } from '../../public/lists/answers'
 import { TileState } from "../components/Tile";
-import { loadPreferences, Settings, Stats } from "./preferences";
+import { saveStats } from "./preferences";
+import { usePreferences } from "../components/PreferenceProvider";
 
 export interface GameData {
     answer: string;
@@ -35,6 +36,13 @@ const emptyGameData: GameData = {
 export default function game() {
 
     const [gameState, setGameState] = useState(emptyGameData)
+    const preferences = usePreferences();
+
+    const statsSavedRef = useRef(false);
+
+    if (!preferences) return;
+
+    const { stats } = preferences;
 
     function chooseRandomWord() {
         setGameState(prev => ({
@@ -43,6 +51,7 @@ export default function game() {
             guesses: ['', '', '', '', '', ''],
             current: 0,
         }))
+        statsSavedRef.current = false;
     }
 
     function handleLetterInput(letter: string) {
@@ -145,6 +154,25 @@ export default function game() {
             return guess
         }
     }
+
+    useEffect(() => {
+
+        const finished = gameState.hasWon || gameState.current > 5;
+        if (!finished) return;
+        if (statsSavedRef.current) return;
+
+        if (gameState.hasWon) {
+            stats.wins++;
+            stats.currentStreak++;
+            if (stats.currentStreak > stats.maxStreak) stats.maxStreak = stats.currentStreak
+            stats.scoreDistribution[gameState.current - 1]++;
+        } else stats.currentStreak = 0;
+        
+        stats.gamesPlayed++;
+
+        saveStats(stats)
+        statsSavedRef.current = true;
+    }, [gameState.hasWon, gameState.current])
 
     return { gameState, setGameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile }
 
