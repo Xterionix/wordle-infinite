@@ -9,7 +9,11 @@ import game, { getTileState } from '../lib/game';
 
 const Home: React.FC = () => {
 
-  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile } = game()
+  const g = game();
+
+  if (!g) return;
+
+  const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile } = g;
   const history = useHistory()
 
   useEffect(() => {
