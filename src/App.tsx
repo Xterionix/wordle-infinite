@@ -38,23 +38,26 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 import { Route } from 'react-router';
 import Settings from './pages/Settings';
+import PreferenceProvider from './components/PreferenceProvider';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path={"/"}>
-            <Home />
-          </Route>
-          <Route exact path={"/settings"}>
-            <Settings />
-          </Route>
-        </IonRouterOutlet>
-      </IonTabs>
-    </IonReactRouter>
+    <PreferenceProvider>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path={"/"}>
+              <Home />
+            </Route>
+            <Route exact path={"/settings"}>
+              <Settings />
+            </Route>
+          </IonRouterOutlet>
+        </IonTabs>
+      </IonReactRouter>
+    </PreferenceProvider>
   </IonApp>
 );
 

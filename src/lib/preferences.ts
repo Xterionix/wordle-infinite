@@ -47,27 +47,6 @@ let initialSettings: Settings = {
     animationSpeed: AnimationSpeed.normal
 }
 
-export default function usePreferences() {
-
-    const [stats, setStats] = useState(initialStats);
-    const [settings, setSettings] = useState(initialSettings);
-
-    useEffect(() => {
-        async function callReload() {
-            await reloadPreferences()
-        }
-        callReload()
-    }, [])
-
-    async function reloadPreferences() {
-        const data = await loadPreferences();
-        setStats(data.stats);
-        setSettings(data.settings)
-    }
-
-    return { stats, settings, reloadPreferences }
-}
-
 export async function loadPreferences() {
     const { value } = await Preferences.get({ key: 'stats' })
 

@@ -1,13 +1,14 @@
-import { IonButtons, IonButton, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonButtons, IonButton, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
 import { settings as settingsIcon } from "ionicons/icons";
 import { useHistory } from 'react-router';
-import usePreferences, { AnimationSpeed, AnimationSpeeds, saveSettings, Theme } from '../lib/preferences';
+import { AnimationSpeed, saveSettings, Theme } from '../lib/preferences';
 import type { Settings } from '../lib/preferences';
+import { usePreferences } from '../components/PreferenceProvider';
 
 const Settings: React.FC = () => {
 
   const history = useHistory();
-  const { settings, stats } = usePreferences();
+  const { settings, stats } = usePreferences()!;
 
   function updateSetting<K extends keyof Settings>(key: K, value: Settings[K]) {
     settings[key] = value
