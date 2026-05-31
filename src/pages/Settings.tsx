@@ -1,13 +1,11 @@
-import { IonButtons, IonButton, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
-import { settings as settingsIcon } from "ionicons/icons";
-import { useHistory } from 'react-router';
+import { IonContent, IonHeader, IonPage, IonList, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
 import { AnimationSpeed, applySetting, saveSettings, Theme } from '../lib/preferences';
 import type { Settings } from '../lib/preferences';
 import { usePreferences } from '../components/PreferenceProvider';
+import Toolbar from '../components/Toolbar';
 
 const Settings: React.FC = () => {
 
-  const history = useHistory();
   const preferences = usePreferences();
 
   if (preferences == null) return;
@@ -23,14 +21,7 @@ const Settings: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle className='title' onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>WORDLE INFINITE</IonTitle>
-          <IonButtons slot="end">
-            <IonButton fill="clear" routerLink="/settings">
-              <IonIcon slot='icon-only' icon={settingsIcon}></IonIcon>
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
+        <Toolbar/>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
         <IonList>

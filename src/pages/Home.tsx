@@ -1,11 +1,10 @@
-import { IonButtons, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { settings } from "ionicons/icons";
+import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow } from '@ionic/react';
 import { useEffect } from 'react';
-import { useHistory } from 'react-router';
 import Tile from '../components/Tile'
 import './Home.css';
 import Keyboard from '../components/Keyboard';
 import game, { getTileState } from '../lib/game';
+import Toolbar from '../components/Toolbar';
 
 const Home: React.FC = () => {
 
@@ -14,7 +13,6 @@ const Home: React.FC = () => {
   if (!g) return;
 
   const { gameState, chooseRandomWord, handleLetterInput, handleDelete, handleEnter, resetShakeRow, incrementFlipTile } = g;
-  const history = useHistory()
 
   useEffect(() => {
     if (gameState.answer == '') chooseRandomWord()
@@ -25,14 +23,7 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle className='title' onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>WORDLE INFINITE</IonTitle>
-          <IonButtons slot="end">
-            <IonButton fill="clear" routerLink="/settings">
-              <IonIcon slot='icon-only' icon={settings}></IonIcon>
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
+        <Toolbar />
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
         <div className='correct-answer' style={{ display: !gameState.hasWon && gameState.current > 5 ? '' : 'none' }}>
