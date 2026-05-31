@@ -39,6 +39,7 @@ import './theme/variables.css';
 import { Route } from 'react-router';
 import Settings from './pages/Settings';
 import PreferenceProvider from './components/PreferenceProvider';
+import Statistics from './pages/Statistics';
 
 setupIonicReact();
 
@@ -53,6 +54,9 @@ const App: React.FC = () => (
             </Route>
             <Route exact path={"/settings"}>
               <Settings />
+            </Route>
+            <Route exact path={"/statistics"}>
+              <Statistics />
             </Route>
           </IonRouterOutlet>
         </IonTabs>
