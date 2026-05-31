@@ -1,5 +1,5 @@
 .progress-bar {
-  background-color: rgb(58, 58, 60);
+  background-color: var(--app-surface-color);
   padding: 0.7dvh;
   border-radius: 1px;
 }

@@ -6,17 +6,17 @@
 }
 
 .key.unguessed {
-    background-color: rgb(129, 131, 132);
+    background-color: var(--app-key-neutral-color);
 }
 
 .key.correct {
-    background-color: rgb(83, 141, 78);
+    background-color: var(--app-success-color);
 }
 
 .key.incorrect {
-    background-color: rgb(58, 58, 60);
+    background-color: var(--app-surface-color);
 }
 
 .key.semi-correct {
-    background-color: rgb(181, 159, 59);
+    background-color: var(--app-warning-color);
 }

@@ -44,25 +44,25 @@
 }
 
 .unguessed-full {
-    border: 3px solid rgb(86, 87, 88);
+    border: 3px solid var(--app-surface-strong-color);
     border-radius: 2px;
 }
 
 .unguessed-empty {
-    border: 3px solid rgb(58, 58, 60);
+    border: 3px solid var(--app-surface-color);
     border-radius: 2px;
 }
 
 .correct {
-    background-color: rgb(83, 141, 78);
+    background-color: var(--app-success-color);
 }
 
 .incorrect {
-    background-color: rgb(58, 58, 60);
+    background-color: var(--app-surface-color);
 }
 
 .semi-correct {
-    background-color: rgb(181, 159, 59);
+    background-color: var(--app-warning-color);
 }
 
 .pop {
