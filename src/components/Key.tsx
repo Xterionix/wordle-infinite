@@ -22,6 +22,10 @@ export function Key({ char, children, style, gameState, onClick }: Props) {
         else if (isFlipping && !gameState.isFlipping) { setState(nextState); setFlipping(false) }
     }, [gameState.isFlipping])
 
+    useEffect(() => {
+        setState(TileState.Unguessed)
+    }, [gameState.answer])
+
     return (
         <div className={`key ion-display-flex ion-align-items-center ion-justify-content-center ${char.length == 1 ? state : 'unguessed'}`} style={style} onClick={() => onClick(char)}>
             {children ?? char}
