@@ -10,12 +10,10 @@ const Settings: React.FC = () => {
 
   if (preferences == null) return;
 
-  const { settings } = preferences;
+  const { settings, updateSettings } = preferences;
 
   function updateSetting<K extends keyof Settings>(key: K, value: Settings[K]) {
-    settings[key] = value
-    saveSettings(settings)
-    applySetting(key, value)
+    updateSettings(key, value)
   }
 
   return (
