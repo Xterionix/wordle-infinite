@@ -53,19 +53,19 @@ export default function usePreferences() {
     const [settings, setSettings] = useState(initialSettings);
 
     useEffect(() => {
-        async function callFetch() {
-            await fetchPreferences()
+        async function callReload() {
+            await reloadPreferences()
         }
-        callFetch()
+        callReload()
     }, [])
 
-    async function fetchPreferences() {
+    async function reloadPreferences() {
         const data = await loadPreferences();
         setStats(data.stats);
         setSettings(data.settings)
     }
 
-    return { stats, settings, fetchPreferences }
+    return { stats, settings, reloadPreferences }
 }
 
 export async function loadPreferences() {
