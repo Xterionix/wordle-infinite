@@ -2,13 +2,13 @@ import { IonIcon } from "@ionic/react";
 import { backspaceOutline, arrowForwardCircleOutline } from "ionicons/icons"
 import { Key } from "./Key"
 import './Keyboard.css';
-import { GameData } from "../lib/game";
+import { GameState } from "../lib/game";
 
 interface Props {
     onClick: (char: string) => void
     onDelete: () => void
     onEnter: () => void
-    gameState: GameData
+    gameState: GameState
 }
 
 const Keyboard: React.FC<Props> = ({ onClick, onDelete, onEnter, gameState }: Props) => {

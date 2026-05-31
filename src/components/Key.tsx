@@ -1,13 +1,13 @@
 import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 import './Key.css';
-import { findLetterState, GameData } from '../lib/game';
+import { findLetterState, GameState } from '../lib/game';
 import { TileState } from './Tile';
 
 interface Props {
     char: string;
     children?: ReactNode;
     style?: CSSProperties;
-    gameState: GameData
+    gameState: GameState
     onClick: (char: string) => void
 }
 

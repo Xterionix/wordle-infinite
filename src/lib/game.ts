@@ -5,7 +5,7 @@ import { TileState } from "../components/Tile";
 import { saveStats } from "./preferences";
 import { usePreferences } from "../components/PreferenceProvider";
 
-export interface GameData {
+export interface GameState {
     answer: string;
     guesses: string[];
     current: number;
@@ -19,7 +19,7 @@ export interface GameData {
     isFlipping: boolean
 }
 
-const emptyGameData: GameData = {
+const emptyGameState: GameState = {
     answer: '',
     guesses: ['', '', '', '', '', ''],
     current: 0,
@@ -35,7 +35,7 @@ const emptyGameData: GameData = {
 
 export default function game() {
 
-    const [gameState, setGameState] = useState(emptyGameData)
+    const [gameState, setGameState] = useState(emptyGameState)
     const preferences = usePreferences();
 
     const statsSavedRef = useRef(false);
@@ -77,7 +77,7 @@ export default function game() {
     function handleEnter() {
         setGameState(prev => {
 
-            if (prev.hasWon || prev.current > 5) return structuredClone(emptyGameData)
+            if (prev.hasWon || prev.current > 5) return structuredClone(emptyGameState)
 
             if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) return {
                 ...prev,
@@ -167,7 +167,7 @@ export default function game() {
             if (stats.currentStreak > stats.maxStreak) stats.maxStreak = stats.currentStreak
             stats.scoreDistribution[gameState.current - 1]++;
         } else stats.currentStreak = 0;
-        
+
         stats.gamesPlayed++;
 
         saveStats(stats)
@@ -178,14 +178,14 @@ export default function game() {
 
 }
 
-export function getTileState(state: GameData, guess: string, letter: string, letterIndex: number, guessIndex: number) {
+export function getTileState(state: GameState, guess: string, letter: string, letterIndex: number, guessIndex: number) {
 
     if (letter == '' || guessIndex == state.current) return TileState.Unguessed;
     return getKeyState(state, guess, letter, letterIndex);
 
 }
 
-export function getKeyState(state: GameData, guess: string, letter: string, letterIndex: number) {
+export function getKeyState(state: GameState, guess: string, letter: string, letterIndex: number) {
     if (!state.answer.toUpperCase().includes(letter)) return TileState.Incorrect;
     if (state.answer.toUpperCase()[letterIndex] == letter) return TileState.Correct;
 
@@ -203,7 +203,7 @@ export function getKeyState(state: GameData, guess: string, letter: string, lett
 
 }
 
-export function findLetterState(state: GameData, letter: string) {
+export function findLetterState(state: GameState, letter: string) {
     if (state.correctLetters.includes(letter)) return TileState.Correct
     if (state.semiCorrectLetters.includes(letter)) return TileState.SemiCorrect
     if (state.incorrectLetters.includes(letter)) return TileState.Incorrect

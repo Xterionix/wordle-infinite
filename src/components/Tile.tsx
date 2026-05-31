@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Tile.css';
-import { GameData } from '../lib/game';
+import { GameState } from '../lib/game';
 
 export const enum TileState {
     Unguessed = 'unguessed', // Transparent
@@ -14,7 +14,7 @@ interface Props {
     selected: boolean
     state: TileState
     flip: boolean,
-    gameState: GameData
+    gameState: GameState
     onAnimationEnd: () => void
 }
 
