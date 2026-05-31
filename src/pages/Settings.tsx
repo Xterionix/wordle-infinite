@@ -33,11 +33,6 @@ const Settings: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle className='ion-text-center title' onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>WORDLE INFINITE</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <IonList>
           <IonItem>
             <IonSelect label='Theme' value={settings.theme} onIonChange={(e) => { updateSetting('theme', e.detail.value) }}>

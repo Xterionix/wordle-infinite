@@ -35,11 +35,6 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className='ion-padding'>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle className='ion-text-center title' onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>WORDLE INFINITE</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <div className='correct-answer' style={{ display: !gameState.hasWon && gameState.current > 5 ? '' : 'none' }}>
           <div id='answer'>{gameState.answer}</div>
         </div>
