@@ -1,13 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Tile.css';
-import { GameState } from '../lib/game';
-
-export const enum TileState {
-    Unguessed = 'unguessed', // Transparent
-    Incorrect = 'incorrect', // Grayed out
-    Correct = 'correct', // Green
-    SemiCorrect = 'semi-correct' // Yellow
-}
+import { GameState, TileState } from '../lib/game';
 
 interface Props {
     char: string;

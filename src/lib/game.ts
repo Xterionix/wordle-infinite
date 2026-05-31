@@ -1,9 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import { allowedGuesses } from '../../public/lists/all'
 import { answers } from '../../public/lists/answers'
-import { TileState } from "../components/Tile";
 import { saveStats } from "./preferences";
 import { usePreferences } from "../components/PreferenceProvider";
+
+export const enum TileState {
+    Unguessed = 'unguessed', // Transparent
+    Incorrect = 'incorrect', // Grayed out
+    Correct = 'correct', // Green
+    SemiCorrect = 'semi-correct' // Yellow
+}
 
 export interface GameState {
     answer: string;
