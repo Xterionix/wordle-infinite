@@ -1,16 +1,35 @@
-/* For information on how to create your own theme, please refer to:
-http://ionicframework.com/docs/theming/ */
-
 :root {
-  --ion-background-color: rgb(18, 18, 19);
-  --ion-font-family: Arial, sans-serif;
+    --ion-background-color: rgb(18, 18, 19);
+    --ion-font-family: Arial, sans-serif;
+    --ion-text-color: var(--app-text-color);
 
-  --app-background-color: rgb(18, 18, 19);
-  --app-surface-color: rgb(58, 58, 60);
-  --app-surface-strong-color: rgb(86, 87, 88);
-  --app-key-neutral-color: rgb(129, 131, 132);
-  --app-success-color: rgb(83, 141, 78);
-  --app-warning-color: rgb(181, 159, 59);
-  --app-paper-color: rgb(248, 248, 248);
-  --app-paper-text-color: rgb(18, 18, 19);
+    --app-background-color: rgb(18, 18, 19);
+    --app-surface-color: rgb(58, 58, 60);
+    --app-surface-strong-color: rgb(86, 87, 88);
+    --app-key-neutral-color: rgb(129, 131, 132);
+    --app-success-color: rgb(83, 141, 78);
+    --app-warning-color: rgb(181, 159, 59);
+    --app-paper-color: rgb(248, 248, 248);
+    --app-paper-text-color: rgb(18, 18, 19);
+    --app-text-color: rgb(248, 248, 248);
+}
+
+.light {
+    --ion-text-color: var(--app-text-color);
+    --ion-background-color: rgb(248, 248, 248);
+    --app-background-color: rgb(248, 248, 248);
+    --app-surface-color: rgb(211, 214, 218);
+    --app-surface-strong-color: rgb(135, 138, 140);
+    --app-key-neutral-color: rgb(211, 214, 218);
+    --app-paper-color: rgb(248, 248, 248);
+    --app-paper-text-color: rgb(18, 18, 19);
+    --app-text-color: rgb(18, 18, 18);
+}
+
+.dark ion-item {
+    --border-color: rgb(86, 87, 88)
+}
+
+.alert-radio-label {
+    color: var(--app-text-color) !important;
 }

@@ -3,6 +3,7 @@
     width: 8dvw;
     height: 8dvh;
     font-weight: bolder;
+    color: var(--app-text-color)
 }
 
 .key.unguessed {
