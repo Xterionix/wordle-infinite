@@ -1,5 +1,4 @@
 import { Preferences } from '@capacitor/preferences';
-import { useEffect, useState } from 'react';
 
 export interface Stats {
     gamesPlayed: number;
@@ -67,4 +66,18 @@ export async function saveStats(stats: Stats) {
 
 export async function saveSettings(settings: Settings) {
     await Preferences.set({ key: 'settings', value: JSON.stringify(settings) })
+}
+
+export function applySetting<K extends keyof Settings>(key: K, value: Settings[K]) {
+    switch (key) {
+        case 'theme':
+            break;
+        case 'animationSpeed':
+            document.documentElement.style.setProperty('--animation-speed', `${value}s`)
+            break;
+    }
+}
+
+export function applySettings(settings: Settings) {
+    (Object.keys(settings) as (keyof Settings)[]).forEach(key => applySetting(key, settings[key]))
 }

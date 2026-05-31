@@ -18,7 +18,7 @@
 
 .flip {
     animation-name: flip;
-    animation-duration: 0.8s;
+    animation-duration: var(--animation-speed);
     animation-fill-mode: forwards;
 }
 

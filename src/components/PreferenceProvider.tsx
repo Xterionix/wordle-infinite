@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loadPreferences, Settings, Stats } from "../lib/preferences";
+import { applySettings, loadPreferences, Settings, Stats } from "../lib/preferences";
 
 type PreferencesContext = {
     stats: Stats
@@ -17,13 +17,14 @@ const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         const data = await loadPreferences();
         setStats(data.stats);
         setSettings(data.settings)
+        applySettings(data.settings)
     }
 
     useEffect(() => {
         async function callReload() {
             await reloadPreferences()
         }
-        callReload()
+        callReload();
     }, [])
 
     return (
