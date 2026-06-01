@@ -2,4 +2,8 @@
 
 ## Bugs
 
+- Average guesses calculation is wrong 2 guesses with 4 attempts both gives an average of 3
+- Stats screen does not reload on mobile until you leave the app and come back
+- Light mode keys do not darken when guessed to be invalid
+
 ## Features
