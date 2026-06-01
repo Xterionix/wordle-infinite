@@ -32,9 +32,9 @@ const Home: React.FC = () => {
         <IonGrid>
           {
             gameState.guesses.map((guess, i) => {
-              return <IonRow key={i} className={i == gameState.shakeRow ? 'shake' : ''} onAnimationEnd={resetShakeRow}>
+              return <IonRow key={i} className={i == gameState.shakeRow ? 'shake bouncer' : 'bouncer'} onAnimationEnd={resetShakeRow}>
                 {Array.from({ length: 5 }, (_, j) => guess[j] ?? '').map((letter, j) => (
-                  <IonCol key={j}>
+                  <IonCol key={j} className={gameState.hasWon && !gameState.isFlipping && i == gameState.current - 1 ? 'bounce' : ''}>
                     <Tile gameState={gameState} char={letter.toUpperCase()} flip={gameState.flipTile == j && gameState.current > i} onAnimationEnd={incrementFlipTile} selected={false} state={getTileState(gameState, guess, letter, j, i)} />
                   </IonCol>
                 ))}
