@@ -18,8 +18,6 @@ const Home: React.FC = () => {
     if (gameState.answer == '') chooseRandomWord()
   }, [gameState.answer])
 
-  console.log(gameState)
-
   return (
     <IonPage>
       <IonHeader>
