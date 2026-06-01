@@ -44,8 +44,6 @@ npm run build
 npx cap run android
 ```
 
-Start the dev server:
-
 ## Notes
 
 - IOS/PWA not tested.
