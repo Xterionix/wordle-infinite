@@ -90,7 +90,6 @@ export default function game() {
                 shakeRow: prev.current
             }
 
-            let nextUnguessedLetters = [...prev.unguessedLetters]
             const currentGuess = prev.guesses[prev.current]
             currentGuess.split('').forEach((letter, i) => {
                 switch (getKeyState(prev, currentGuess, letter, i)) {
@@ -104,7 +103,6 @@ export default function game() {
                         if (!prev.semiCorrectLetters.includes(letter)) prev.semiCorrectLetters = [...prev.semiCorrectLetters, letter];
                         break;
                 }
-                nextUnguessedLetters = nextUnguessedLetters.filter(x => x !== letter)
             });
 
             const nextIndex = prev.current + 1
