@@ -24,8 +24,8 @@ const Statistics: React.FC = () => {
           <IonGrid className='stats' fixed={true}>
             <IonRow>
               <IonCol className='stat-value ion-display-flex ion-justify-content-center'>{stats.gamesPlayed}</IonCol>
-              <IonCol className='stat-value ion-display-flex ion-justify-content-center'>{Math.floor((stats.wins / stats.gamesPlayed) * 100)}</IonCol>
-              <IonCol className='stat-value ion-display-flex ion-justify-content-center'>{(stats.scoreDistribution.reduce((prev, curr, i) => i * curr + (i == 0 ? 0 : prev)) / stats.gamesPlayed).toFixed(1)}</IonCol>
+              <IonCol className='stat-value ion-display-flex ion-justify-content-center'>{stats.gamesPlayed == 0 ? 0 : Math.floor((stats.wins / stats.gamesPlayed) * 100)}</IonCol>
+              <IonCol className='stat-value ion-display-flex ion-justify-content-center'>{stats.gamesPlayed == 0 ? 0 : (stats.scoreDistribution.reduce((prev, curr, i) => i * curr + (i == 0 ? 0 : prev)) / stats.gamesPlayed).toFixed(1)}</IonCol>
               <IonCol className='stat-value ion-display-flex ion-justify-content-center'>{stats.gamesPlayed - stats.wins}</IonCol>
             </IonRow>
             <IonRow style={{ 'marginBottom': '2dvh' }}>
