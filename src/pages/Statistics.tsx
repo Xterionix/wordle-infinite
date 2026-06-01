@@ -1,4 +1,4 @@
-import { IonCol, IonContent, IonGrid, IonHeader, IonList, IonPage, IonProgressBar, IonRow } from '@ionic/react';
+import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow } from '@ionic/react';
 import { usePreferences } from '../components/PreferenceProvider';
 import Toolbar from '../components/Toolbar';
 

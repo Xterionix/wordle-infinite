@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonList, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
-import { AnimationSpeed, applySetting, saveSettings, Theme } from '../lib/preferences';
+import { AnimationSpeed, Theme } from '../lib/preferences';
 import type { Settings } from '../lib/preferences';
 import { usePreferences } from '../components/PreferenceProvider';
 import Toolbar from '../components/Toolbar';
