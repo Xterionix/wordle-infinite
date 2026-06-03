@@ -15,7 +15,7 @@
 }
 
 .key.incorrect {
-    background-color: var(--app-surface-color);
+    background-color: var(--app-key-incorrect-color);
 }
 
 .key.semi-correct {
