@@ -48,7 +48,7 @@ export default function game() {
 
     if (!preferences) return;
 
-    const { stats } = preferences;
+    const { stats, updateStats } = preferences;
 
     function chooseRandomWord() {
         setGameState(prev => ({
@@ -174,7 +174,7 @@ export default function game() {
 
         stats.gamesPlayed++;
 
-        saveStats(stats)
+        updateStats(stats)
         statsSavedRef.current = true;
     }, [gameState.hasWon, gameState.current])
 

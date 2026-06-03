@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { applySettings, loadPreferences, saveSettings, Settings, Stats } from "../lib/preferences";
+import { applySettings, loadPreferences, saveSettings, saveStats, Settings, Stats } from "../lib/preferences";
 import { IonSpinner } from "@ionic/react";
 
 type PreferencesContext = {
     stats: Stats
     settings: Settings
     updateSettings: <K extends keyof Settings>(key: K, value: Settings[K]) => void
+    updateStats: (stats: Stats) => void
 }
 
 const PreferencesContext = createContext<PreferencesContext | null>(null);
@@ -25,6 +26,13 @@ const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         })
     }
 
+    function updateStats(stats: Stats) {
+        setStats(() => {
+            saveStats(stats)
+            return stats
+        })
+    }
+
     async function reloadPreferences() {
         const data = await loadPreferences();
         setStats(data.stats);
@@ -41,7 +49,7 @@ const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }, [])
 
     return (
-        <PreferencesContext.Provider value={{ stats, settings, updateSettings }}>
+        <PreferencesContext.Provider value={{ stats, settings, updateSettings, updateStats }}>
             {loading ? <IonSpinner style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', height: '10vh', width: '10vh' }} /> : children}
         </PreferencesContext.Provider>
     );
