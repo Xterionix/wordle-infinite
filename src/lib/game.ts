@@ -193,13 +193,16 @@ export function getKeyState(state: GameState, guess: string, letter: string, let
     if (!state.answer.toUpperCase().includes(letter)) return TileState.Incorrect;
     if (state.answer.toUpperCase()[letterIndex] == letter) return TileState.Correct;
 
+    const guessSplit = guess.split('')
     const answerLetterCount = state.answer.toUpperCase().split('').filter(x => x == letter).length
-    const guessLetterCount = guess.split('').filter(x => x == letter).length
+    const guessLetterCount = guessSplit.filter(x => x == letter).length
 
     if (answerLetterCount == guessLetterCount && answerLetterCount == 1) return TileState.SemiCorrect
 
-    const matchingLetterLocations = guess.split('').map((x, i) => x == letter ? i : -1).filter(x => x != -1)
-    for (let i = 0; i < answerLetterCount; i++) {
+    const matchingLetterLocations = guessSplit.map((x, i) => x == letter ? i : -1).filter(x => x != -1)
+    const alreadyCorrectAnswers = (guessSplit.map((x, i) => x == letter && state.answer.toUpperCase()[i] == letter ? 1 : 0) as number[]).reduce((a, b) => a + b, 0);
+
+    for (let i = 0; i < answerLetterCount - alreadyCorrectAnswers; i++) {
         if (matchingLetterLocations[i] == letterIndex) return TileState.SemiCorrect
     }
 
