@@ -99,12 +99,12 @@ export default function game() {
     function handleDelete() {
         setGameState(prev => {
 
+            if (prev.hasWon) return prev;
+
             if (prev.guesses[prev.current].length <= 0) return {
                 ...prev,
                 shakeRow: prev.current
             }
-
-            if (prev.hasWon) return prev;
 
             const nextGuesses = [...prev.guesses]
             nextGuesses[prev.current] = nextGuesses[prev.current].slice(0, nextGuesses[prev.current].length - 1)
