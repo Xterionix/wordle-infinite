@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 import './Key.css';
-import { findLetterState, GameState, TileState } from '../lib/game';
+import { TileState, GameState, findLetterState } from "../lib/gameLogic";
 
 interface Props {
     char: string;

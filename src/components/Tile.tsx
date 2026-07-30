@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Tile.css';
-import { GameState, TileState } from '../lib/game';
+import { TileState, GameState } from "../lib/gameLogic";
 
 interface Props {
     char: string;

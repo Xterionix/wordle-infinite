@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import Tile from '../components/Tile'
 import './Home.css';
 import Keyboard from '../components/Keyboard';
-import game, { getTileState } from '../lib/game';
+import game from '../lib/game';
+import { getTileState } from "../lib/gameLogic";
 import Toolbar from '../components/Toolbar';
 
 const Home: React.FC = () => {

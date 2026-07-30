@@ -2,7 +2,7 @@ import { IonIcon } from "@ionic/react";
 import { backspaceOutline, arrowForwardCircleOutline } from "ionicons/icons"
 import { Key } from "./Key"
 import './Keyboard.css';
-import { GameState } from "../lib/game";
+import { GameState } from "../lib/gameLogic";
 
 interface Props {
     onClick: (char: string) => void
