@@ -53,7 +53,8 @@ export default function game() {
     function chooseRandomWord() {
         setGameState(prev => ({
             ...prev,
-            answer: answers[Math.floor(Math.random() * answers.length)],
+            answer: 'beech',
+            // answer: answers[Math.floor(Math.random() * answers.length)],
             guesses: ['', '', '', '', '', ''],
             current: 0,
         }))
@@ -85,10 +86,10 @@ export default function game() {
 
             if (prev.hasWon || prev.current > 5) return structuredClone(emptyGameState)
 
-            if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) return {
-                ...prev,
-                shakeRow: prev.current
-            }
+            // if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) return {
+            //     ...prev,
+            //     shakeRow: prev.current
+            // }
 
             const currentGuess = prev.guesses[prev.current]
             currentGuess.split('').forEach((letter, i) => {
@@ -197,13 +198,16 @@ export function getKeyState(state: GameState, guess: string, letter: string, let
     const answerLetterCount = state.answer.toUpperCase().split('').filter(x => x == letter).length
     const guessLetterCount = guessSplit.filter(x => x == letter).length
 
+    // If X only exists once within the answer and once within the guess, then as it's not (in)correct it's SemiCorrect
     if (answerLetterCount == guessLetterCount && answerLetterCount == 1) return TileState.SemiCorrect
 
-    const matchingLetterLocations = guessSplit.map((x, i) => x == letter ? i : -1).filter(x => x != -1)
+    const alreadyCorrectLocations = guessSplit.map((x, i) => x == letter && state.answer.toUpperCase()[i] == letter ? i : undefined)
+    const matchingLetterLocations = guessSplit.map((x, i) => x == letter ? i : -1).filter(x => x != -1).filter(x => !alreadyCorrectLocations.includes(x))
     const alreadyCorrectAnswers = (guessSplit.map((x, i) => x == letter && state.answer.toUpperCase()[i] == letter ? 1 : 0) as number[]).reduce((a, b) => a + b, 0);
 
-    for (let i = 0; i < answerLetterCount - alreadyCorrectAnswers; i++) {
-        if (matchingLetterLocations[i] == letterIndex) return TileState.SemiCorrect
+    // If guess has 2 correctly use X twice and X appears in the answer twice only, the loop won't run
+    for (let i = 0; i < answerLetterCount - alreadyCorrectAnswers; i++) { // If guess has misplaced X
+        if (matchingLetterLocations[i] == letterIndex) return TileState.SemiCorrect // Then from the remaining locations mark yellow
     }
 
     return TileState.Incorrect
