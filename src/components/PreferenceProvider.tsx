@@ -27,9 +27,14 @@ const PreferenceProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
 
     function updateStats(stats: Stats) {
+        const nextStats = {
+            ...stats,
+            scoreDistribution: [...stats.scoreDistribution] as Stats['scoreDistribution']
+        }
+
         setStats(() => {
-            saveStats(stats)
-            return stats
+            saveStats(nextStats)
+            return nextStats
         })
     }
 
