@@ -72,16 +72,20 @@ export default function game() {
             }
 
             const currentGuess = prev.guesses[prev.current]
+            const correctLetters = [...prev.correctLetters]
+            const incorrectLetters = [...prev.incorrectLetters]
+            const semiCorrectLetters = [...prev.semiCorrectLetters]
+
             currentGuess.split('').forEach((letter, i) => {
                 switch (getKeyState(prev, currentGuess, letter, i)) {
                     case TileState.Correct:
-                        if (!prev.correctLetters.includes(letter)) prev.correctLetters = [...prev.correctLetters, letter];
+                        if (!correctLetters.includes(letter)) correctLetters.push(letter);
                         break;
                     case TileState.Incorrect:
-                        if (!prev.incorrectLetters.includes(letter)) prev.incorrectLetters = [...prev.incorrectLetters, letter];
+                        if (!incorrectLetters.includes(letter)) incorrectLetters.push(letter);
                         break;
                     case TileState.SemiCorrect:
-                        if (!prev.semiCorrectLetters.includes(letter)) prev.semiCorrectLetters = [...prev.semiCorrectLetters, letter];
+                        if (!semiCorrectLetters.includes(letter)) semiCorrectLetters.push(letter);
                         break;
                 }
             });
@@ -92,6 +96,9 @@ export default function game() {
                 ...prev,
                 current: nextIndex,
                 hasWon: lastGuess()?.toLowerCase() == gameState.answer,
+                correctLetters,
+                incorrectLetters,
+                semiCorrectLetters,
                 isFlipping: true
             }
         })
