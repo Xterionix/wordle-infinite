@@ -64,6 +64,7 @@ export default function game() {
         setGameState(prev => {
 
             if (prev.hasWon || prev.current > 5) return structuredClone(emptyGameState)
+            if (prev.isFlipping) return prev
 
             if (!allowedGuesses.includes(prev.guesses[prev.current].toLowerCase())) return {
                 ...prev,
