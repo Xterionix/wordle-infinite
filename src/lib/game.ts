@@ -95,7 +95,7 @@ export default function game() {
             return {
                 ...prev,
                 current: nextIndex,
-                hasWon: lastGuess()?.toLowerCase() == gameState.answer,
+                hasWon: currentGuess.toLowerCase() == prev.answer,
                 correctLetters,
                 incorrectLetters,
                 semiCorrectLetters,
@@ -137,14 +137,6 @@ export default function game() {
             flipTile: prev.flipTile + 1 > 4 ? 0 : prev.flipTile + 1,
             isFlipping: prev.flipTile + 1 > 4 ? false : true
         }))
-    }
-
-    function lastGuess() {
-        for (let i = 5; i >= 0; i--) {
-            const guess = gameState.guesses[i]
-            if (guess === '') continue;
-            return guess
-        }
     }
 
     useEffect(() => {
