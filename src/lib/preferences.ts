@@ -1,4 +1,5 @@
 import { Preferences } from '@capacitor/preferences';
+import { GameState } from './gameLogic';
 
 export interface Stats {
     gamesPlayed: number;
@@ -57,7 +58,10 @@ export async function loadPreferences() {
     if (value2 == null) saveSettings(initialSettings);
     const settings = value2 == null ? initialSettings : JSON.parse(value2)
 
-    return { stats, settings }
+    const { value: value3 } = await Preferences.get({ key: 'state' })
+    const state = value3 == null ? null : JSON.parse(value3);
+
+    return { stats, settings, state }
 }
 
 export async function saveStats(stats: Stats) {
@@ -66,6 +70,10 @@ export async function saveStats(stats: Stats) {
 
 export async function saveSettings(settings: Settings) {
     await Preferences.set({ key: 'settings', value: JSON.stringify(settings) })
+}
+
+export async function saveLastState(state: GameState) {
+    await Preferences.set({ key: 'state', value: JSON.stringify(state) })
 }
 
 export function applySetting<K extends keyof Settings>(key: K, value: Settings[K]) {

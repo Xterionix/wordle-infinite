@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { allowedGuesses } from '../../public/lists/all'
 import { answers } from '../../public/lists/answers'
-import { saveStats } from "./preferences";
+import { saveLastState, saveStats } from "./preferences";
 import { usePreferences } from "../components/PreferenceProvider";
 import { GameState, getKeyState, TileState } from "./gameLogic";
 
@@ -21,14 +21,19 @@ const emptyGameState: GameState = {
 
 export default function game() {
 
-    const [gameState, setGameState] = useState(emptyGameState)
     const preferences = usePreferences();
-
+    
     const statsSavedRef = useRef(false);
-
+    
     if (!preferences) return;
+    
+    const { stats, updateStats, lastState } = preferences;
+    
+    const [gameState, setGameState] = useState(lastState == null ? emptyGameState : lastState)
 
-    const { stats, updateStats } = preferences;
+    useEffect(() => {
+        saveLastState(gameState);
+    }, [gameState.current]);
 
     function chooseRandomWord() {
         setGameState(prev => ({
